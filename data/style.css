@@ -1,0 +1,49 @@
+* { box-sizing: border-box; }
+:root { color-scheme: dark; font-family: "Segoe UI", sans-serif; background: #11141a; color: #f5f6fa; --chat-size: 22px; }
+body { margin: 0; display: flex; flex-direction: column; height: 100dvh; }
+[hidden] { display: none !important; }
+header { background: #1b2029; padding: 12px; border-bottom: 1px solid #393f4b; max-height: 75vh; overflow: auto; flex-shrink: 0; }
+.heading, .statuses, .actions, nav { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+h1 { font-size: 22px; margin: 0 8px 6px 0; }
+.statuses { font-size: 14px; }
+.twitch { color: #d3b4ff; }
+.tiktok { color: #83f5ed; }
+details { padding: 8px 0; font-size: 15px; }
+summary { cursor: pointer; }
+form { display: grid; gap: 8px; margin: 10px 0; }
+form > label { display: grid; gap: 4px; }
+#remove-key { display: flex; align-items: center; }
+form button { justify-self: start; }
+button, input, select { font: inherit; color: inherit; background: #262e3c; border: 1px solid #596579; padding: 5px 8px; border-radius: 5px; }
+button { cursor: pointer; }
+button[aria-pressed=true] { background: #c7f6e7; color: #112721; border-color: #c7f6e7; }
+#connection, #error { color: #ffbc9e; }
+#error:empty { display: none; }
+nav { font-size: 14px; }
+main { flex: 1; min-height: 0; overflow-y: auto; scrollbar-gutter: stable; padding: 0 10px 12px; }
+ol, ul { margin: 0; padding: 0; list-style: none; }
+li { padding: 9px 5px; border-bottom: 1px solid #303743; overflow-wrap: anywhere; }
+.row-meta { display: flex; gap: 7px; align-items: baseline; font-size: 14px; flex-wrap: wrap; color: #afb8c9; }
+.name, .message { font-size: var(--chat-size); line-height: 1.32; }
+.name { font-weight: 700; }
+.message { white-space: pre-wrap; }
+.caps .message { text-transform: uppercase; }
+li.gift { border-left: 4px solid #ffcc70; padding-left: 9px; color: #ffe3a7; }
+li.join .message { color: #b7c5ce; }
+.message img { max-height: 1.4em; vertical-align: middle; }
+#people-info, #empty { color: #c3ccdb; margin: 12px 4px; }
+#latest { position: absolute; right: 14px; bottom: 12px; background: #c7f6e7; color: #112721; }
+
+footer { flex-shrink: 0; max-height: 50vh; overflow: auto; background: #1b2029; border-top: 1px solid #393f4b; padding: 0 12px; }
+#twitch-auth-status, #twitch-result { margin: 4px 0; font-size: 14px; overflow-wrap: anywhere; }
+#twitch-auth-status:empty, #twitch-result:empty { display: none; }
+#twitch-activate { color: #d3b4ff; }
+#twitch-composer { display: flex; gap: 6px; }
+#twitch-composer input { flex: 1; min-width: 0; }
+.twitch-message-action { display: none; margin-left: auto; font-size: 12px; padding: 2px 6px; }
+.twitch-moderating .twitch-message-action { display: inline-block; }
+#latest { position: fixed; bottom: auto; top: 55%; z-index: 1; }
+
+#twitch-people { padding-top: 10px; }
+#twitch-people-search { min-width: 0; max-width: 100%; }
+#twitch-people-summary { color: #c3ccdb; margin: 10px 4px; }

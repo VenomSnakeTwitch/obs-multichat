@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OBS Multi-Chat</title>
+<link rel="stylesheet" href="/style.css">
+<script src="/app.js" defer></script>
+<script src="/twitch-dock.js" defer></script>
+</head>
+<body>
+<header>
+  <div class="heading"><h1>Multi-Chat</h1><span id="connection" role="status"></span></div>
+  <div class="statuses"><span class="twitch" id="twitch">Twitch</span><span class="tiktok" id="tiktok">TikTok</span></div>
+  <details id="settings"><summary>Einstellungen</summary>
+    <form id="channels">
+      <label>Twitch-Kanal <input name="twitch" maxlength="26" autocomplete="off" placeholder="kanalname"></label>
+      <label>TikTok-LIVE <input name="tiktok" maxlength="33" autocomplete="off" placeholder="@kanalname"></label>
+      <label>EulerStream API-Schlüssel <input type="password" name="key" autocomplete="off" placeholder="Optional, falls erforderlich"></label>
+      <label id="remove-key" hidden><input type="checkbox" name="removeKey"> Gespeicherten Schlüssel löschen</label>
+      <button type="submit">Verbinden</button>
+    </form>
+    <p id="error" role="alert"></p>
+    <div class="actions"><button id="demo">Demo starten</button><label>Schrift <select id="size"><option>18</option><option selected>22</option><option>26</option><option>30</option><option>36</option><option>42</option></select> px</label><label><input id="caps" type="checkbox"> GROSSBUCHSTABEN</label></div>
+  </details>
+  <nav aria-label="Ansicht" id="tabs">
+    <button data-view="all" aria-pressed="true">Alle</button><button data-view="twitch">Twitch</button><button data-view="tiktok">TikTok</button><button data-view="gift">Geschenke</button><button data-view="people">TikTok-Nutzer</button><button data-view="twitch-people">Twitch-Nutzer</button>
+  </nav>
+</header>
+<main>
+  <section id="twitch-people" aria-label="Twitch-Nutzer im Chat" hidden>
+    <div class="actions">
+      <input id="twitch-people-search" type="search" aria-label="Twitch-Nutzer suchen" placeholder="Name suchen">
+      <button type="button" id="twitch-people-refresh">Aktualisieren</button>
+    </div>
+    <p id="twitch-people-summary" role="status"></p>
+    <ul id="twitch-people-list"></ul>
+  </section>
+  <div id="people-info" hidden><strong id="viewers"></strong><p>Erkannte Nutzer aus Beitritten, Kommentaren und Geschenken.</p></div>
+  <p id="empty"></p>
+  <ol id="feed" aria-label="Chatverlauf"></ol>
+  <ul id="people" aria-label="Erkannte TikTok-Nutzer" hidden></ul>
+</main>
+<button id="latest" hidden>Zu den neuesten Nachrichten ↓</button>
+<footer aria-label="Twitch-Chat und Moderation">
+  <details id="twitch-access">
+    <summary>Twitch-Moderation</summary>
+    <form id="twitch-login">
+      <label>Client-ID der Twitch-App <input name="clientId" maxlength="64" required autocomplete="off" placeholder="Client-ID (App-Typ Public)"></label>
+      <button type="submit">Bei Twitch anmelden</button>
+    </form>
+    <p id="twitch-auth-status" role="status"></p>
+    <a id="twitch-activate" target="_blank" rel="noopener noreferrer" hidden>Auf Twitch bestätigen</a>
+    <button id="twitch-logout" type="button" hidden>Abmelden</button>
+    <details><summary>Unterstützte Befehle</summary>
+      <p><code>/timeout Nutzer [Sekunden] [Grund]</code>, <code>/ban Nutzer [Grund]</code>, <code>/unban Nutzer</code>, <code>/untimeout Nutzer</code></p>
+      <p><code>/pin ID [Sekunden]</code>, <code>/unpin [ID]</code>, <code>/delete ID</code>, <code>/clear</code></p>
+      <p><code>/announce Text</code>, <code>/shoutout Nutzer</code></p>
+      <p><code>/slow [Sekunden]</code>, <code>/followers [Minuten]</code>, <code>/subscribers</code>, <code>/emoteonly</code>, <code>/uniquechat</code>. Mit <code>off</code> am Befehlsende ausschalten.</p>
+      <p>Chatbot-Befehle wie <code>!discord</code> werden als normale Chatnachrichten gesendet.</p>
+    </details>
+  </details>
+  <form id="twitch-action" hidden>
+    <strong id="twitch-action-target"></strong>
+    <label>Aktion
+      <select name="action">
+        <option value="pin">Nachricht auf Twitch anpinnen</option>
+        <option value="unpin">Pin entfernen</option>
+        <option value="timeout">Timeout</option>
+        <option value="ban">Bannen</option>
+        <option value="unban">Sperre aufheben</option>
+        <option value="delete">Nachricht löschen</option>
+      </select>
+    </label>
+    <label>Dauer in Sekunden <input type="number" name="duration" placeholder="Leer: bis Streamende"></label>
+    <label>Grund <input name="reason" maxlength="500"></label>
+    <div class="actions"><button type="submit">Ausführen</button><button id="twitch-cancel-action" type="button">Abbrechen</button></div>
+  </form>
+  <form id="twitch-composer" hidden>
+    <input name="message" aria-label="Nachricht oder Twitch-Befehl" placeholder="Nachricht, /Befehl oder !Befehl" maxlength="560" required autocomplete="off">
+    <button type="submit">Senden</button>
+  </form>
+  <p id="twitch-result" role="status"></p>
+</footer>
+</body>
+</html>
+
+
+

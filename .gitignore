@@ -1,0 +1,7 @@
+build/
+node_modules/
+channels.json*
+.env*
+*.dll
+*.exe
+*.zip

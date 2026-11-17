@@ -1,0 +1,4 @@
+LIBRARY obs-frontend-api.dll
+EXPORTS
+    obs_frontend_add_dock_by_id
+
